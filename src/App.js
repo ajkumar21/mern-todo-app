@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TodosList from './components/todos-list';
 import EditTodo from './components/edit-todo';
@@ -7,7 +7,7 @@ import CreateTodo from './components/create-todo';
 
 const App = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <div className='container'>
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
           <Link to='/' className='navbar-brand'>
@@ -29,11 +29,13 @@ const App = () => {
           </div>
         </nav>
         <br />
-        <Route path='/' exact component={TodosList} />
-        <Route path='/edit/:id' component={EditTodo} />
-        <Route path='/create' component={CreateTodo} />
+        <Switch>
+          <Route path='/' exact component={TodosList} />
+          <Route path='/edit/:id' component={EditTodo} />
+          <Route path='/create' component={CreateTodo} />
+        </Switch>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
 

@@ -37,12 +37,6 @@ class createToDo extends Component {
   onSubmit(e) {
     e.preventDefault(); //default html behaviour is prevented
 
-    console.log(`Form submitted:`);
-    console.log(`Todo Description: ${this.state.todo_description}`);
-    console.log(`Todo Responsible: ${this.state.todo_responsible}`);
-    console.log(`Todo Priority: ${this.state.todo_priority}`);
-    console.log(`Todo Priority: ${this.state.todo_completed}`);
-
     const newTodo = {
       todo_description: this.state.todo_description,
       todo_responsible: this.state.todo_responsible,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import Edit from './edit-todo';
 
 class toDo extends Component {
   constructor(props) {
@@ -9,9 +9,12 @@ class toDo extends Component {
     this.state = {
       todos: []
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.getTable = this.getTable.bind(this);
   }
 
-  componentDidMount() {
+  getData() {
     axios
       .get('http://localhost:4000/todos/')
       .then(res => {
@@ -22,16 +25,30 @@ class toDo extends Component {
       });
   }
 
+  componentDidMount() {
+    this.getData();
+  }
+
+  onChange() {
+    this.getData();
+  }
+
   getTable() {
     return this.state.todos.map((todo, i) => {
       return (
         <tr key={i}>
-          <td>{todo.todo_description}</td>
-          <td>{todo.todo_responsible}</td>
-          <td>{todo.todo_priority}</td>
+          <td className={todo.todo_completed ? 'completed' : ''}>
+            {todo.todo_description}
+          </td>
+          <td className={todo.todo_completed ? 'completed' : ''}>
+            {todo.todo_responsible}
+          </td>
+          <td className={todo.todo_completed ? 'completed' : ''}>
+            {todo.todo_priority}
+          </td>
           <td>{todo.todo_completed ? 'Yes' : 'No'}</td>
           <td>
-            <Link to={'/edit/' + todo._id}>Edit</Link>
+            <Edit id={todo._id} changed={this.onChange} />
           </td>
         </tr>
       );

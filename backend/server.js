@@ -59,8 +59,10 @@ todoRoutes.route('/add').post(function(req, res) {
 todoRoutes.route('/update/:id').post(function(req, res) {
   Todo.findById(req.params.id, function(err, todo) {
     if (err) {
+      console.log('haha');
       res.status(404).send('data is not found');
     } else {
+      console.log(todo);
       todo.todo_description = req.body.todo_description;
       todo.todo_responsible = req.body.todo_responsible;
       todo.todo_priority = req.body.todo_priority;
