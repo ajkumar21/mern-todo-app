@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TodosList from './components/todos-list';
-import Create from './components/create-todo';
 import { Navbar } from 'react-bootstrap';
 
 const App = () => {
@@ -12,7 +11,6 @@ const App = () => {
         <Navbar bg='dark' variant='dark'>
           <Navbar.Brand href='/'>{'My to do list'}</Navbar.Brand>
           <br />
-          <Create />
         </Navbar>
 
         <br />

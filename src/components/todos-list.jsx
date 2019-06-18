@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
 import Edit from './edit-todo';
+import Create from './create-todo';
 
 class toDo extends Component {
   constructor(props) {
@@ -10,8 +11,8 @@ class toDo extends Component {
       todos: []
     };
 
-    this.onChange = this.onChange.bind(this);
     this.getTable = this.getTable.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
   getData() {
@@ -19,6 +20,7 @@ class toDo extends Component {
       .get('http://localhost:4000/todos/')
       .then(res => {
         this.setState({ todos: res.data });
+        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -26,10 +28,6 @@ class toDo extends Component {
   }
 
   componentDidMount() {
-    this.getData();
-  }
-
-  onChange() {
     this.getData();
   }
 
@@ -48,7 +46,7 @@ class toDo extends Component {
           </td>
           <td>{todo.todo_completed ? 'Yes' : 'No'}</td>
           <td>
-            <Edit id={todo._id} changed={this.onChange} />
+            <Edit id={todo._id} changed={this.getData} />
           </td>
         </tr>
       );
@@ -57,18 +55,22 @@ class toDo extends Component {
 
   render() {
     return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Owner</th>
-            <th>Priority</th>
-            <th>Completion Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>{this.getTable()}</tbody>
-      </Table>
+      <div>
+        <Create changed={this.getData} />
+        <br />
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Owner</th>
+              <th>Priority</th>
+              <th>Completion Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>{this.getTable()}</tbody>
+        </Table>
+      </div>
     );
   }
 }

@@ -60,6 +60,7 @@ class createToDo extends Component {
       todo_completed: false
     }); //reset fields
     this.toggle();
+    this.props.changed();
   }
   render() {
     return (

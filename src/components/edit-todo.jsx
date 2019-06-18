@@ -70,12 +70,7 @@ class editToDo extends Component {
     axios
       .post('http://localhost:4000/todos/update/' + this.props.id, newTodo)
       .then(res => console.log(res.status + ' ' + res.data));
-    this.setState({
-      todo_description: '',
-      todo_responsible: '',
-      todo_priority: '',
-      todo_completed: false
-    }); //reset fields
+
     this.toggle();
     this.props.changed();
   }
